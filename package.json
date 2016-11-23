@@ -1,0 +1,62 @@
+{
+  "name": "coap-webapp-boilerplate",
+  "version": "0.0.0",
+  "description": "This boilerplate is for coap-shepherd teaching.",
+  "main": "main.js",
+  "dependencies": {
+    "coap-shepherd": "^0.1.8",
+    "busyman": "^0.2.0",
+    "chalk": "^1.1.3",
+    "express": "^4.14.0",
+    "socket.io": "^1.4.8"
+  },
+  "devDependencies": {
+    "babel-core": "^6.13.2",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-react-hmre": "^1.1.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "clean-webpack-plugin": "^0.1.10",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "file-loader": "^0.9.0",
+    "html-webpack-plugin": "^2.22.0",
+    "json-loader": "^0.5.4",
+    "material-ui": "^0.15.4",
+    "purifycss-webpack-plugin": "^2.0.3",
+    "react": "15.3.1",
+    "react-addons-test-utils": "15.3.1",
+    "react-dom": "15.3.1",
+    "react-grid-layout": "^0.13.1",
+    "react-hot-loader": "^3.0.0-beta.6",
+    "react-tap-event-plugin": "^1.0.0",
+    "react-transform-hmr": "^1.0.4",
+    "socket.io-client": "^1.4.8",
+    "stats-webpack-plugin": "^0.4.2",
+    "style-loader": "^0.13.1",
+    "superagent": "^2.2.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.2",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-merge": "^0.14.1",
+    "webpack-validator": "^2.2.7"
+  },
+  "scripts": {
+    "start": "node main",
+    "start-build": "NODE_ENV=production node main",
+    "build": "NODE_ENV=production webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PeterEB/coap-webapp-boilerplate.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PeterEB/coap-webapp-boilerplate/issues"
+  },
+  "homepage": "https://github.com/PeterEB/coap-webapp-boilerplate"
+}
