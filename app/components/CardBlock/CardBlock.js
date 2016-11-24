@@ -1,5 +1,4 @@
 import React, {PropTypes} from 'react';
-import {connect} from 'react-redux';
 import GridLayout from 'react-grid-layout';
 import {WidthProvider} from 'react-grid-layout';
 
@@ -12,11 +11,11 @@ var keyCounter,
 
 var CardBlock = React.createClass({
     propTypes: {
-        devs: PropTypes.object.isRequired
+        devs: PropTypes.object.isRequired,
+        onClick: PropTypes.func.isRequired,
     },
 
     getCard: function (type, permAddr, status, auxId, value) {
-        console.log(arguments);
         var card,
             enable = false,
             cardProps = {};
@@ -29,7 +28,7 @@ var CardBlock = React.createClass({
             case 'Illuminance':
                 cardProps.key = 'bigCard0';
                 cardProps.dataGrid = {x: 2, y: 0, w: 2, h: 2};
-                card = (<Illuminance enable={enable} temp={value} />);
+                card = (<Illuminance enable={enable} lux={value} />);
                 break;
             case 'Light':
                 cardProps.key = 'smallCard0';

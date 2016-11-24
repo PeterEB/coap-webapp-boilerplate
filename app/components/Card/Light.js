@@ -9,30 +9,27 @@ var fgColor = "#FFF",
     fgColorOn = "#f9ffa8",
     fgColorOff = "#FFF";
 
-const Light = ({ enable, onOff, onClick }) => {
-    enable = !!enable;
-    onOff = !!onOff;
-    onClick = enable ? onClick || function () {
-        console.log('Light clicked');
-    } : null;
+const Light = React.createClass({
+    propTypes: {
+        enable: PropTypes.bool.isRequired,
+        onOff: PropTypes.bool.isRequired,
+        onClick: PropTypes.func.isRequired
+    },
+    render: function() {
+        let enable = !!this.props.enable;
+        let onOff = !!this.props.onOff;
+        let onClick = enable ? this.props.onClick(this.props.permAddr, this.props.auxId, !onOff) : null;
 
-    let cardBgColor = enable ? bgColor : bgColorDisabled;
-    let cardFgColor = enable ? (onOff ? fgColorOn : fgColorOff) : fgColorDisabled;
+        // background color 與 fg color 會根據裝置的網路連線狀態有所不同
+        // [TODO]
 
-    let reallyOn = enable && onOff;
-    let icon = reallyOn ? <LightOnIcon fill={cardFgColor} /> : <LightOffIcon fill={cardFgColor} />;
+        // icon 會根據裝置的開關狀態有所不同
+        // [TODO]
 
-    return (
-        <div style={{width: '100%', height: '100%', backgroundColor: cardBgColor }} onClick={onClick}>
-            {icon}
-        </div>
-    );
-}
-
-Light.propTypes = {
-    enable: PropTypes.bool.isRequired,
-    onOff: PropTypes.bool.isRequired,
-    onClick: PropTypes.func.isRequired
-};
+        return (
+            // [TODO]
+        );
+    }
+});
 
 export default Light

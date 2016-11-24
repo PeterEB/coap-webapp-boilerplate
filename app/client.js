@@ -44,41 +44,55 @@ var App = React.createClass({
         ioConnectedDelay(function () {
             // 發送 getDevs 的 request 請求至 Server 端
             // [TODO]
+
         });
 
         // 監聽 permitJoining 事件，並改變 component 的狀態
         ioClient.on('permitJoining', function (msg) {
             // msg = { timeLeft }
             // [TODO]
+            self.setState({
+                timeLeft: msg.timeLeft
+            });
         });
 
         // 監聽 devIncoming 事件，並改變 component 的狀態
         ioClient.on('devIncoming', function (msg) {
             // msg =  { dev }
             // [TODO]
+            self.setState({
+                devs: { ...self.state.devs, [msg.dev.permAddr]: msg.dev }
+            });
         });
 
         // 監聽 devStatus 事件，並改變 component 的狀態
         ioClient.on('devStatus', function (msg) {
             // msg = { permAddr, status }
             // [TODO]
+
         });
 
         // 監聽 attrsChange 事件，並改變 component 的狀態
         ioClient.on('attrsChange', function (msg) {
             // msg = { permAddr, gad } 
             // [TODO]
+
         });
     },
 
     // 發送 permitJoin 的 request 請求至 Server 端
     onPermitCallback: function () {
         // [TODO]
+        ioClient.sendReq('permitJoin', { time: 60 }, function (err, data) {
+            if (err)
+                console.log(err);
+        });
     },
 
     // 發送 write 的 request 請求至 Server 端
     onWriteCallback: function (permAddr, auxId, value) {
         // [TODO]
+
     },
 
     render: function () {

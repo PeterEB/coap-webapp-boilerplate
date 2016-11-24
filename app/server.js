@@ -4,21 +4,25 @@ var fs = require('fs');
 var chalk = require('chalk');
 var _ = require('busyman');
 var cserver = require('coap-shepherd');
+var utils = require('./helpers/utils');
 
 // 使用 ioServer 作為與 Web Client 溝通的介面
 // [TODO]
+var ioServer = require('./helpers/ioServer');
 
 // 溫控系統的應用程式
 // [TODO]
+var lightCtrlApp = require('./lightCtrlApp');
 
 // 建立 HTTP Server
 // [TODO]
+var server = http.createServer();
 
 server.listen(3030);
 
 // 啟動 ioServer
 // [TODO]
-
+ioServer.start(server);
 
 function serverApp () {
     // show Welcome Msg               
@@ -31,6 +35,9 @@ function serverApp () {
     // 註冊 permitJoin 處理函式
     ioServer.regReqHdlr('permitJoin', function (args, cb) { 
         // [TODO]
+        cserver.permitJoin(args.time);
+
+        cb(null);
     });
 
     // 註冊 getDevs 處理函式
@@ -46,19 +53,22 @@ function serverApp () {
     cserver.on('ready', function () {
         console.log(chalk.green('[         ready ] '));
 
-        // 當 coap-shepherd 啟動完畢，執行溫控應用
+        // 當 coap-shepherd 啟動完畢，執行燈控應用
         // [TODO]
+        lightCtrlApp(cserver);
     });
 
-    // 監聽 permitJoining 事件，並轉發至 Client端
+    // 監聽 permitJoining 事件，並轉發至 Client 端
     cserver.on('permitJoining', function (timeLeft) {
         console.log(chalk.green('[ permitJoining ] ') + timeLeft + ' sec');
 
         // [TODO]
+        ioServer.sendInd('permitJoining', { timeLeft: timeLeft });
     });
 
     cserver.on('error', function (err) {
         console.log(chalk.red('[         error ] ') + err.message);
+        ioServer.sendInd('error', { msg: msg });
     });
 
     cserver.on('ind', function (msg) {
@@ -68,9 +78,10 @@ function serverApp () {
             /*** devIncoming      ***/
             // 監聽 devIncoming 事件，並轉發至 Client端
             case 'devIncoming':
-                console.log(chalk.yellow('[   devIncoming ] ') + '@' + dev.addr);
+                console.log(chalk.yellow('[   devIncoming ] ') + '@' + cnode.clientName);
 
                 // [TODO]
+                ioServer.sendInd('devIncoming', { dev: utils.getDevInfo(cnode) });
                 break;
 
             /*** devStatus        ***/
@@ -83,14 +94,21 @@ function serverApp () {
                 else 
                     status = chalk.red(status);
 
-                console.log(chalk.magenta('[     devStatus ] ') + '@' + dev.addr + ', ' + status);
+                console.log(chalk.magenta('[     devStatus ] ') + '@' + cnode.clientName + ', ' + status);
 
                 // [TODO]
+
                 break;
 
             /*** devNotify       ***/
             case 'devNotify':
-                // [TODO]                
+                var pathArray = utils.pathSlashParser(msg.data.path),
+                    gad = utils.getGadInfo(pathArray[0], pathArray[1], pathArray[2], msg.data.value);
+
+                console.log(chalk.blue('[   attrsChange ] ') + '@' + cnode.clientName + ', auxId: ' + gad.auxId + ', value: ' + gad.value);
+                
+                // [TODO] 
+
                 break;
         }
     });
@@ -105,6 +123,7 @@ function serverApp () {
 
     // 啟動 coap-shepherd
     // [TODO]
+    cserver.start();
 }
 
 

@@ -85,17 +85,9 @@ const WeatherCard = React.createClass({
                     <div style={{position: 'relative', transform: 'translateY(-50%)', top: '50%', margin: "0% auto", width: '80%'}}>
                         <div style={{width: '100%', height: '30%'}}>{weatherIcon}</div>
                         <div style={{fontSize: '1em', color: '#35BBFC', margin:'5% 0% 10%', textAlign: "center"}}>
-                            // <svg fill="#FFFFFF" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-                            //     <path d="M16 13h-3V3h-2v10H8l4 4 4-4zM4 19v2h16v-2H4z"/>
-                            //     <path d="M0 0h24v24H0z" fill="none"/>
-                            // </svg>
                             {tempMin}°  L
                         </div>
                         <div style={{fontSize: '1em', color: '#D64541', textAlign: "center"}}>
-                            // <svg fill="#FFFFFF" height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-                            //     <path d="M8 11h3v10h2V11h3l-4-4-4 4zM4 3v2h16V3H4z"/>
-                            //     <path d="M0 0h24v24H0z" fill="none"/>
-                            // </svg>
                             {tempMax}°  H
                         </div>
                     </div>
