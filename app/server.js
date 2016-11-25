@@ -7,22 +7,16 @@ var cserver = require('coap-shepherd');
 var utils = require('./helpers/utils');
 
 // 使用 ioServer 作為與 Web Client 溝通的介面
-// [TODO]
 var ioServer = require('./helpers/ioServer');
 
 // 溫控系統的應用程式
 // [TODO]
-var lightCtrlApp = require('./lightCtrlApp');
 
 // 建立 HTTP Server
 // [TODO]
-var server = http.createServer();
-
-server.listen(3030);
 
 // 啟動 ioServer
 // [TODO]
-ioServer.start(server);
 
 function serverApp () {
     // show Welcome Msg               
@@ -35,18 +29,18 @@ function serverApp () {
     // 註冊 permitJoin 處理函式
     ioServer.regReqHdlr('permitJoin', function (args, cb) { 
         // [TODO]
-        cserver.permitJoin(args.time);
 
-        cb(null);
     });
 
     // 註冊 getDevs 處理函式
     ioServer.regReqHdlr('getDevs', function (args, cb) { 
         // [TODO]
+
     });
 
     ioServer.regReqHdlr('write', function (args, cb) { 
         // [TODO]
+
     });
 
     // event listeners
@@ -55,7 +49,7 @@ function serverApp () {
 
         // 當 coap-shepherd 啟動完畢，執行燈控應用
         // [TODO]
-        lightCtrlApp(cserver);
+
     });
 
     // 監聽 permitJoining 事件，並轉發至 Client 端
@@ -63,7 +57,7 @@ function serverApp () {
         console.log(chalk.green('[ permitJoining ] ') + timeLeft + ' sec');
 
         // [TODO]
-        ioServer.sendInd('permitJoining', { timeLeft: timeLeft });
+
     });
 
     cserver.on('error', function (err) {
@@ -81,7 +75,7 @@ function serverApp () {
                 console.log(chalk.yellow('[   devIncoming ] ') + '@' + cnode.clientName);
 
                 // [TODO]
-                ioServer.sendInd('devIncoming', { dev: utils.getDevInfo(cnode) });
+
                 break;
 
             /*** devStatus        ***/
@@ -123,7 +117,7 @@ function serverApp () {
 
     // 啟動 coap-shepherd
     // [TODO]
-    cserver.start();
+
 }
 
 

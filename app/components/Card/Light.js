@@ -27,7 +27,9 @@ const Light = React.createClass({
         // [TODO]
 
         return (
-            // [TODO]
+            <div style={{width: '100%', height: '100%', backgroundColor: cardBgColor }} onClick={onClick}>
+                [TODO]
+            </div>
         );
     }
 });
